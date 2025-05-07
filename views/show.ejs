@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>Proverb</title></head>
+<body>
+  <h2><%= proverb.translationEn %></h2>
+  <p><strong>Dari:</strong> <%= proverb.textDari %></p>
+  <p><strong>Pashto:</strong> <%= proverb.textPashto %></p>
+  <p><strong>Meaning:</strong> <%= proverb.meaning %></p>
+  <p><strong>Category:</strong> <%= proverb.category %></p>
+
+  <a href="/proverbs/<%= proverb.id %>/edit">Edit</a>
+  <form method="POST" action="/proverbs/<%= proverb.id %>/delete">
+    <button type="submit">Delete</button>
+  </form>
+  <a href="/">Back</a>
+</body>
+</html>

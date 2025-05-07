@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Proverb</title>
+</head>
+<body>
+  <h1>Edit Proverb</h1>
+  <form action="/proverbs/<%= proverb.id %>?_method=PUT" method="POST">
+    <label>Dari:</label><br>
+    <input type="text" name="textDari" value="<%= proverb.textDari %>"><br>
+    <label>Pashto:</label><br>
+    <input type="text" name="textPashto" value="<%= proverb.textPashto %>"><br>
+    <label>English Translation:</label><br>
+    <input type="text" name="translationEn" value="<%= proverb.translationEn %>"><br>
+    <label>Meaning:</label><br>
+    <textarea name="meaning"><%= proverb.meaning %></textarea><br>
+    <label>Category (comma-separated):</label><br>
+    <input type="text" name="category" value="<%= proverb.category.join(', ') %>"><br><br>
+    <button type="submit">Update</button>
+  </form>
+</body>
+</html>

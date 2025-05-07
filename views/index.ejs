@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Afghan Proverbs</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>All Proverbs</h1>
+      <a href="/proverbs/new">Add New Proverb</a>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>English</th>
+            <th>Pashto</th>
+            <th>Dari</th>
+            <th>Meaning</th>
+            <th>Category</th>
+            <th>View Details</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% proverbs.forEach(p => { %>
+
+          <tr>
+            <td><%= p.id %></td>
+            <td><%= p.translationEn %></td>
+            <td><%= p.textPashto %></td>
+            <td><%= p.textDari %></td>
+            <td><%= p.meaning %></td>
+            <td><%= p.category %></td>
+            <td><a href="/proverbs/<%= p.id %>">Show</a></td>
+            <td>
+              <a href="/proverbs/<%= p.id %>/edit">Edit</a>
+            </td>
+
+            <td>
+              <form method="POST" action="/proverbs/<%= p.id %>/delete">
+                <button type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
