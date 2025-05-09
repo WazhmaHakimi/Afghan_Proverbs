@@ -1,16 +1,74 @@
 <!DOCTYPE html>
 <html>
-<head><title>Proverb Form</title></head>
-<body>
-  <h2><%= proverb ? 'Edit' : 'New' %> Proverb</h2>
-  <form method="POST" action="<%= proverb ? '/proverbs/' + proverb.id : '/proverbs' %>">
-    <input type="text" name="textDari" placeholder="Dari" value="<%= proverb?.textDari || '' %>" required><br>
-    <input type="text" name="textPashto" placeholder="Pashto" value="<%= proverb?.textPashto || '' %>" required><br>
-    <input type="text" name="translationEn" placeholder="English" value="<%= proverb?.translationEn || '' %>" required><br>
-    <input type="text" name="meaning" placeholder="Meaning" value="<%= proverb?.meaning || '' %>" required><br>
-    <input type="text" name="category" placeholder="Category" value="<%= proverb?.category || '' %>" required><br>
-    <button type="submit">Submit</button>
-  </form>
-  <a href="/proverbs">Cancel</a>
-</body>
+  <head>
+    <title>Afghan Proverbs</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h2><%= proverb ? 'Edit' : 'New' %> Proverb</h2>
+      <form
+        class="form"
+        method="POST"
+        action="<%= proverb ? '/proverbs/' + proverb.id : '/proverbs' %>"
+      >
+        <div class="group">
+          <label>Pashto:</label>
+          <input
+            type="text"
+            name="textPashto"
+            placeholder="Pashto"
+            value="<%= proverb?.textPashto || '' %>"
+          />
+        </div>
+
+        <div class="group">
+          <label>Dari:</label>
+          <input
+            type="text"
+            name="textDari"
+            placeholder="Dari"
+            value="<%= proverb?.textDari || '' %>"
+          />
+        </div>
+
+        <div class="group">
+          <label>English:</label>
+          <input
+            type="text"
+            name="translationEn"
+            placeholder="English"
+            value="<%= proverb?.translationEn || '' %>"
+          />
+        </div>
+
+        <div class="group">
+          <label>English meaining:</label>
+          <input
+            type="text"
+            name="meaning"
+            placeholder="Meaning"
+            value="<%= proverb?.meaning || '' %>"
+          />
+        </div>
+
+        <div class="group span2">
+          <label>Category:</label>
+          <input
+            type="text"
+            name="category"
+            placeholder="Category"
+            value="<%= proverb?.category || '' %>"
+          />
+        </div>
+
+        <button class="btn btn-show" type="submit">
+          <a>Submit</a>
+        </button>
+        <form action="/proverbs">
+          <button class="btn btn-delete">Cancel</button>
+        </form>
+      </form>
+    </div>
+  </body>
 </html>

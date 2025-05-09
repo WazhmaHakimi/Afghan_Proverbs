@@ -52,6 +52,29 @@ app.get('/', (req, res) => {
   res.render('index', { proverbs });
 });
 
+app.get('/proverbs', (req, res) => {
+  let proverbs = loadProverbs();
+  const category = req.query.category;
+  const search = req.query.search;
+
+  // Filter by category
+  if (category) {
+    proverbs = proverbs.filter(p => p.category.toLowerCase() === category.toLowerCase());
+  }
+
+  // Search by any language
+  if (search) {
+    const lower = search.toLowerCase();
+    proverbs = proverbs.filter(p =>
+      p.textDari.toLowerCase().includes(lower) ||
+      p.textPashto.toLowerCase().includes(lower) ||
+      p.translationEn.toLowerCase().includes(lower)
+    );
+  }
+
+  res.render('index', { proverbs });
+});
+
 // Random proverb
 app.get('/proverbs/random', (req, res) => {
   const proverbs = loadProverbs();
@@ -84,7 +107,7 @@ app.post('/proverbs', (req, res) => {
   };
   proverbs.push(newProverb);
   saveProverbs(proverbs);
-  res.redirect('/');
+  res.redirect('/proverbs');
 });
 
 // Form to edit an existing proverb
@@ -118,7 +141,7 @@ app.post('/proverbs/:id/delete', (req, res) => {
   let proverbs = loadProverbs();
   proverbs = proverbs.filter(p => p.id !== parseInt(req.params.id));
   saveProverbs(proverbs);
-  res.redirect('/');
+  res.redirect('/proverbs');
 });
 
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));

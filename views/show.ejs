@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head><title>Proverb</title></head>
-<body>
-  <h2><%= proverb.translationEn %></h2>
-  <p><strong>Dari:</strong> <%= proverb.textDari %></p>
-  <p><strong>Pashto:</strong> <%= proverb.textPashto %></p>
-  <p><strong>Meaning:</strong> <%= proverb.meaning %></p>
-  <p><strong>Category:</strong> <%= proverb.category %></p>
+  <head>
+    <title>Afghan Proverbs</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="show-container">
+      <h2 class="span2"><%= proverb.translationEn %></h2>
+      <strong>Pashto:</strong>
+      <p><%= proverb.textPashto %></p>
+      <strong>Dari:</strong>
+      <p><%= proverb.textDari %></p>
+      <strong>Meaning:</strong>
+      <p><%= proverb.meaning %></p>
+      <strong>Category:</strong>
+      <p><%= proverb.category %></p>
 
-  <a href="/proverbs/<%= proverb.id %>/edit">Edit</a>
-  <form method="POST" action="/proverbs/<%= proverb.id %>/delete">
-    <button type="submit">Delete</button>
-  </form>
-  <a href="/">Back</a>
-</body>
+      <div class="action span2">
+        <button class="btn btn-edit">
+          <a href="/proverbs/<%= proverb.id %>/edit">Edit</a>
+        </button>
+        <form method="POST" action="/proverbs/<%= proverb.id %>/delete">
+          <button class="btn btn-delete" type="submit">Delete</button>
+        </form>
+        <button class="btn btn-show">
+          <a href="/proverbs">&laquo;&nbsp;Back</a>
+        </button>
+      </div>
+    </div>
+  </body>
 </html>

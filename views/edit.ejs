@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Edit Proverb</title>
-</head>
-<body>
+<html>
+  <head>
+    <title>Afghan Proverbs</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="container">
   <h1>Edit Proverb</h1>
   <form action="/proverbs/<%= proverb.id %>?_method=PUT" method="POST">
     <label>Dari:</label><br>
@@ -19,5 +20,6 @@
     <input type="text" name="category" value="<%= proverb.category.join(', ') %>"><br><br>
     <button type="submit">Update</button>
   </form>
+    </div>
 </body>
 </html>
