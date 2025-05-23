@@ -25,21 +25,18 @@ function saveProverbs(data) {
 
 // Generate a simple unique ID (just an incrementing integer)
 function generateUniqueId(proverbs) {
-  return proverbs.length ? proverbs[proverbs.length - 1].id + 1 : 1; // Start with 1
+  return proverbs.length ? proverbs[proverbs.length - 1].id + 1 : 1;
 }
 
-// Home - list all proverbs
+// Homepage - list all proverbs
 app.get('/', (req, res) => {
   let proverbs = loadProverbs();
-  const category = req.query.category;
-  const search = req.query.search;
+  const { category, search } = req.query;
 
-  // Filter by category
   if (category) {
     proverbs = proverbs.filter(p => p.category.toLowerCase() === category.toLowerCase());
   }
 
-  // Search by any language
   if (search) {
     const lower = search.toLowerCase();
     proverbs = proverbs.filter(p =>
@@ -52,17 +49,15 @@ app.get('/', (req, res) => {
   res.render('index', { proverbs });
 });
 
+// Get all proverbs
 app.get('/proverbs', (req, res) => {
   let proverbs = loadProverbs();
-  const category = req.query.category;
-  const search = req.query.search;
+  const { category, search } = req.query;
 
-  // Filter by category
   if (category) {
     proverbs = proverbs.filter(p => p.category.toLowerCase() === category.toLowerCase());
   }
 
-  // Search by any language
   if (search) {
     const lower = search.toLowerCase();
     proverbs = proverbs.filter(p =>
@@ -75,21 +70,21 @@ app.get('/proverbs', (req, res) => {
   res.render('index', { proverbs });
 });
 
-// Random proverb
+// Get random proverb
 app.get('/proverbs/random', (req, res) => {
   const proverbs = loadProverbs();
   const random = proverbs[Math.floor(Math.random() * proverbs.length)];
-  res.json(random);
+  res.render('show', { proverb: random });
 });
 
-// Form to create a new proverb
+// Show form to add a new proverb
 app.get('/proverbs/new', (req, res) => {
   res.render('form', { proverb: null });
 });
 
 // Get a single proverb by ID
 app.get('/proverbs/:id', (req, res) => {
-  const proverb = loadProverbs().find(p => p.id === parseInt(req.params.id)); // Use parseInt to match the ID correctly
+  const proverb = loadProverbs().find(p => p.id === parseInt(req.params.id));
   if (!proverb) return res.status(404).send('Proverb not found');
   res.render('show', { proverb });
 });
@@ -97,20 +92,27 @@ app.get('/proverbs/:id', (req, res) => {
 // Create a new proverb
 app.post('/proverbs', (req, res) => {
   const proverbs = loadProverbs();
+  const { textDari, textPashto, translationEn, meaning, category } = req.body;
+
+  if (!textDari || !textPashto || !translationEn || !meaning || !category) {
+    return res.status(400).send('All fields are required.');
+  }
+
   const newProverb = {
-    id: generateUniqueId(proverbs), // Generate a simple incremental ID
-    textDari: req.body.textDari,
-    textPashto: req.body.textPashto,
-    translationEn: req.body.translationEn,
-    meaning: req.body.meaning,
-    category: req.body.category
+    id: generateUniqueId(proverbs),
+    textDari,
+    textPashto,
+    translationEn,
+    meaning,
+    category
   };
+
   proverbs.push(newProverb);
   saveProverbs(proverbs);
-  res.redirect('/proverbs');
+  res.redirect('/');
 });
 
-// Form to edit an existing proverb
+// Show edit form
 app.get('/proverbs/:id/edit', (req, res) => {
   const proverb = loadProverbs().find(p => p.id === parseInt(req.params.id));
   if (!proverb) return res.status(404).send('Proverb not found');
@@ -123,13 +125,18 @@ app.post('/proverbs/:id', (req, res) => {
   const index = proverbs.findIndex(p => p.id === parseInt(req.params.id));
   if (index === -1) return res.status(404).send('Not found');
 
+  const { textDari, textPashto, translationEn, meaning, category } = req.body;
+  if (!textDari || !textPashto || !translationEn || !meaning || !category) {
+    return res.status(400).send('All fields are required.');
+  }
+
   proverbs[index] = {
     id: parseInt(req.params.id),
-    textDari: req.body.textDari,
-    textPashto: req.body.textPashto,
-    translationEn: req.body.translationEn,
-    meaning: req.body.meaning,
-    category: req.body.category
+    textDari,
+    textPashto,
+    translationEn,
+    meaning,
+    category
   };
 
   saveProverbs(proverbs);
@@ -141,7 +148,7 @@ app.post('/proverbs/:id/delete', (req, res) => {
   let proverbs = loadProverbs();
   proverbs = proverbs.filter(p => p.id !== parseInt(req.params.id));
   saveProverbs(proverbs);
-  res.redirect('/proverbs');
+  res.redirect('/');
 });
 
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));

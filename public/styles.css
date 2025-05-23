@@ -73,6 +73,8 @@ body {
     border-width: 2px;
     border-style: solid;
     color: black;
+    text-align: center;
+    cursor: pointer;
   }
 
   .btn a {
@@ -124,6 +126,17 @@ body {
     color: black;
   }
 
+  .btn-black {
+    border-color: black;
+    padding: 2px 20px;
+
+  }
+
+  .btn-black:hover {
+    background-color: black;
+    color: white;
+  }
+
   .form {
     display: grid;
     grid-template-columns: 1fr 1fr; 
@@ -134,11 +147,14 @@ body {
   input {
     padding: 5px 10px;
     border-radius: 0;
-    border: 1px solid black;
+    border: none;
+    border-bottom: 2px solid black;
+    outline: none;
   }
 
   input:focus {
-    outline: 2px solid black;
+    border-bottom: 2px solid black !important;
+    background-color: rgba(216, 238, 246, 0.612);
     border: none;
   }
 
@@ -156,4 +172,12 @@ body {
   .group label {
     font-weight: bold;
     font-size: 12px;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 3rem;
   }

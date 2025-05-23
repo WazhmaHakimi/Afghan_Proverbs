@@ -2,11 +2,14 @@
 <html>
   <head>
     <title>Afghan Proverbs</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <%- include('head') %>
   </head>
   <body>
     <div class="show-container">
-      <h2 class="span2"><%= proverb.translationEn %></h2>
+      <div class="span2 flex">
+        <h1><%= proverb.translationEn %></h1>
+        <a class="btn btn-black" href="/proverbs/random">Random Proverb</a>
+      </div>
       <strong>Pashto:</strong>
       <p><%= proverb.textPashto %></p>
       <strong>Dari:</strong>

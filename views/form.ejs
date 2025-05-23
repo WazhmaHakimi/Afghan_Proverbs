@@ -2,11 +2,16 @@
 <html>
   <head>
     <title>Afghan Proverbs</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <%- include('head') %>
   </head>
   <body>
     <div class="container">
-      <h2><%= proverb ? 'Edit' : 'New' %> Proverb</h2>
+      <div class="flex">
+        <h2><%= proverb ? 'Edit' : 'New' %> Proverb</h2>
+        <form method="GET" action="/proverbs">
+          <button class="btn btn-delete">Cancel</button>
+        </form>
+      </div>
       <form
         class="form"
         method="POST"
@@ -62,12 +67,9 @@
           />
         </div>
 
-        <button class="btn btn-show" type="submit">
+        <button class="span2 btn btn-show" type="submit">
           <a>Submit</a>
         </button>
-        <form action="/proverbs">
-          <button class="btn btn-delete">Cancel</button>
-        </form>
       </form>
     </div>
   </body>

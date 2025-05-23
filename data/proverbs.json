@@ -61,7 +61,7 @@
     "textPashto": "خپل بچي ته مار مه وايه، که مار هم وي",
     "translationEn": "Don’t call your own child a snake, even if he is one.",
     "meaning": "Be careful with how you label your loved ones; your words define relationships.",
-    "category": "Parenting"
+    "category": "Caution"
   },
   {
     "id": 9,
@@ -110,13 +110,5 @@
     "translationEn": "Don’t fight with your own, or strangers will laugh at you.",
     "meaning": "Keep family or internal matters private; public disputes cause dishonor.",
     "category": "Unity"
-  },
-  {
-    "id": 15,
-    "textDari": "",
-    "textPashto": "",
-    "translationEn": "",
-    "meaning": "",
-    "category": ""
   }
 ]

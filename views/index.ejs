@@ -2,16 +2,39 @@
 <html>
   <head>
     <title>Afghan Proverbs</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <%- include('head') %>
   </head>
   <body>
     <div class="container">
       <h1>All Proverbs</h1>
-      <a class="link" href="/proverbs/new">&nbsp;&raquo;</a>
+
+      <div class="flex">
+        <a class="btn btn-black" href="/proverbs/random">Random Proverb</a>
+        <a class="link" href="/proverbs/new">&nbsp;&raquo;</a>
+      </div>
+
+      <!-- Category Filter Input -->
+      <div class="flex" style="margin-top: 1rem;">
+        <input id="categoryInput" type="text" placeholder="Enter category..." />
+        <a class="btn btn-black" onclick="filterByCategory()">Filter By Category</a>
+        <a class="btn btn-black" href="/proverbs">Remove Filter</a>
+      </div>
+
+      <script>
+        function filterByCategory() {
+          const input = document.getElementById('categoryInput').value.trim();
+          if (input) {
+            window.location.href = `/?category=${encodeURIComponent(input)}`;
+          }
+        }
+      </script>
+
       <table>
         <thead>
           <tr>
             <th>ID</th>
+            <th>Dari</th>
+            <th>Pashto</th>
             <th>English</th>
             <th>Category</th>
             <th>View Details</th>
@@ -21,9 +44,10 @@
         </thead>
         <tbody>
           <% proverbs.forEach(p => { %>
-
           <tr>
             <td><%= p.id %></td>
+            <td><%= p.textDari %></td>
+            <td><%= p.textPashto %></td>
             <td><%= p.translationEn %></td>
             <td><%= p.category %></td>
             <td>
@@ -36,14 +60,12 @@
                 <a href="/proverbs/<%= p.id %>/edit">Edit</a>
               </button>
             </td>
-
             <td>
-              <form method="POST" action="/proverbs/<%= p.id %>/delete">
+              <form method="POST" action="/proverbs/<%= p.id %>/delete" onsubmit="return confirm('Are you sure you want to delete this proverb?');">
                 <button class="btn btn-delete" type="submit">Delete</button>
               </form>
             </td>
           </tr>
-
           <% }) %>
         </tbody>
       </table>
