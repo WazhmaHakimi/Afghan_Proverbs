@@ -51,5 +51,8 @@ The Afghan Proverbs App is a simple web application that allows users to browse,
 - Dynamic route handling for CRUD
 - EJS form reuse for both add/edit operations
 
+## First Page
+![Alt text](FirstPage.png)
+
 ## Designed by:
 ### Wazhma Hakimi
